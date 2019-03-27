@@ -3,7 +3,9 @@ package sk.itsovy.bill;
 import sk.itsovy.exception.BillException;
 import sk.itsovy.items.Item;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import sk.itsovy.items.PcsInterface;
@@ -14,6 +16,7 @@ import sk.itsovy.main.Globals;
 public class Bill {
     private int count;
     private boolean open;
+    private Date date;
 
     private List<Item>  list;
 
@@ -24,7 +27,11 @@ public class Bill {
     }
 
     public void end(){
+        if(open){
+            date=new Date();
+        }
         open=false;
+
     }
 
     public void addItem(Item item) throws BillException{
@@ -52,6 +59,7 @@ public class Bill {
     }
 
     public void print(){
+        System.out.println();
         if(count==0)
             System.out.println("Nothing to print. Bill is epmty !");
         else{
@@ -72,9 +80,16 @@ public class Bill {
                 }
 
             }
+            if(!open){
+                System.out.println("Date: "+getDateTime(date));
+            }
         }
     }
     public int getCount(){
         return count;
+    }
+    public String getDateTime(Date date){
+        SimpleDateFormat sdf=new SimpleDateFormat("dd-MMM-YYYY hh:mm:ss");
+        return sdf.format(date);
     }
 }

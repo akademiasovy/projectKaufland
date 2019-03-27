@@ -4,7 +4,7 @@ import sk.itsovy.exception.BillException;
 
 public class Main {
     public static void main(String[] args) throws BillException {
-        Application app=new Application();
+        Application app = Application.getInstance();
         app.example();
     }
 }

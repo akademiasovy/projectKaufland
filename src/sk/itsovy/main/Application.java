@@ -12,7 +12,16 @@ import sk.itsovy.items.food.Food;
 import sk.itsovy.items.food.Fruit;
 import sk.itsovy.items.food.Pastry;
 
+// design patter - Singleton
 public class Application {
+    private static Application app=new Application();
+
+    private Application(){
+    }
+
+    public static Application getInstance(){
+        return app;
+    }
 
     public void example () throws BillException {
         Bill bill = new Bill();
@@ -32,6 +41,14 @@ public class Application {
         Draft beer= new Draft("Birell lemon",1,true,0.5);
         bill.addItem(beer);
         bill.removeItem(beer);
+
+        bill.end();
         bill.print();
+
+        Bill bill2=new Bill();
+        bill2.addItem(new Bottle("Coca cola Zero",0.78,6));
+        bill2.end();
+        //bill2.addItem(new Bottle("Ananas Juice",0.78,6));
+        bill2.print();
     }
 }
